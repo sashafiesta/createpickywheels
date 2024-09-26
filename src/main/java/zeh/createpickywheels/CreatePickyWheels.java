@@ -2,23 +2,21 @@ package zeh.createpickywheels;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import org.slf4j.Logger;
 import zeh.createpickywheels.common.Configuration;
-
-@Mod(zeh.createpickywheels.CreatePickyWheels.MODID)
-public class CreatePickyWheels {
+import net.fabricmc.api.ModInitializer;
+//import net.minecraftforge.fml.ModLoadingContext;
+import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
+public class CreatePickyWheels implements ModInitializer {
 
     public static final String MODID = "createpickywheels";
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final BooleanProperty PICKY = BooleanProperty.create("picky");
 
-    public CreatePickyWheels() {
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
-        MinecraftForge.EVENT_BUS.register(this);
-    }
+	@Override
+	public void onInitialize() {
+		ForgeConfigRegistry.INSTANCE.register(MODID, ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
+	}
 
 }
